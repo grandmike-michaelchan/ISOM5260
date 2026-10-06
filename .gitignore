@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.py[cod]
+admission_system.db-shm
+admission_system.db-wal
+*.db
+*.db-shm
+*.db-wal
+.DS_Store
+
+# Local course materials; keep the public repository focused on project code.
+ISOM5260 Substitute Project description.v1.pdf
+Project Completion Checklist.docx

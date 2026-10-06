@@ -1,0 +1,88 @@
+erDiagram
+    APPLICANTS {
+        INTEGER Applicant_ID PK
+        TEXT Full_Name
+        TEXT Email
+        TEXT Phone
+        DATE Date_of_Birth
+    }
+
+    PROGRAMMES {
+        INTEGER Programme_ID PK
+        TEXT Title
+        TEXT Department
+        INTEGER Capacity
+        REAL Tuition_Fee
+    }
+
+    APPLICATIONS {
+        INTEGER Application_ID PK
+        INTEGER Applicant_ID FK
+        DATE Submission_Date
+        TEXT Overall_Status
+    }
+
+    PROGRAMME_CHOICES {
+        INTEGER Choice_ID PK
+        INTEGER Application_ID FK
+        INTEGER Programme_ID FK
+        INTEGER Preference_Rank
+        TEXT Decision_Status
+    }
+
+    ACADEMIC_QUALIFICATIONS {
+        INTEGER Qual_ID PK
+        INTEGER Applicant_ID FK
+        TEXT Institution
+        TEXT Degree_Name
+        TEXT Major
+        REAL GPA
+    }
+
+    TEST_SCORES {
+        INTEGER Score_ID PK
+        INTEGER Applicant_ID FK
+        TEXT Test_Type
+        REAL Total_Score
+    }
+
+    WORK_EXPERIENCES {
+        INTEGER Exp_ID PK
+        INTEGER Applicant_ID FK
+        TEXT Company
+        TEXT Job_Title
+        REAL Years_Exp
+    }
+
+    DOCUMENTS {
+        INTEGER Doc_ID PK
+        INTEGER Application_ID FK
+        TEXT Doc_Type
+        TEXT Verification_Status
+    }
+
+    REFEREES {
+        INTEGER Ref_ID PK
+        INTEGER Application_ID FK
+        TEXT Referee_Name
+        TEXT Status
+    }
+
+    APPLICATION_FEES {
+        INTEGER Payment_ID PK
+        INTEGER Application_ID FK
+        REAL Amount
+        TEXT Payment_Status
+    }
+
+    APPLICANTS ||--o{ APPLICATIONS : submits
+    APPLICANTS ||--o{ ACADEMIC_QUALIFICATIONS : has
+    APPLICANTS ||--o{ TEST_SCORES : records
+    APPLICANTS ||--o{ WORK_EXPERIENCES : has
+
+    APPLICATIONS ||--o{ PROGRAMME_CHOICES : contains
+    APPLICATIONS ||--o{ DOCUMENTS : submits
+    APPLICATIONS ||--o{ REFEREES : requests
+    APPLICATIONS ||--o{ APPLICATION_FEES : pays
+
+    PROGRAMMES ||--o{ PROGRAMME_CHOICES : selected_in
